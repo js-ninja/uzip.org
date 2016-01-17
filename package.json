@@ -1,0 +1,62 @@
+{
+  "name": "URL_Shortener",
+  "dependencies": {
+    "jquery": "*",
+    "built.io-browserify": "*",
+    "path": "*",
+    "ramda": "*",
+    "react": "0.14.6",
+    "react-dom":"0.14.6",
+    "react-router":"*",
+    "lodash": "*",
+    "less":"*",
+    "gulp-less": "*"
+  },
+  "browserify": {
+    "transform": [
+      "cssify",
+      "babelify"
+    ]
+  },
+  "browserify-shim": {},
+  "devDependencies": {
+    "vinyl": "*",
+    "browserify": "*",
+    "cssify": "*",
+    "babelify":"*",
+    "babel-preset-es2015" :"*",
+    "babel-preset-react":"*",
+    "gulp": "*",
+    "watchify": "*",
+    "gulp-babel":"6.1.1",
+    "gulp-add-src": "^0.2.0",
+    "gulp-autoprefixer": "^2.1.0",    
+    "gulp-buffer": "0.0.2",
+    "gulp-clean": "^0.3.1",
+    "gulp-cssmin": "^0.1.6",    
+    "gulp-cog": "^0.1.2",
+    "gulp-concat": "^2.4.2",
+    "gulp-plumber": "^0.6.6",
+    "gulp-json-editor": "*",
+    "gulp-load-plugins": "^0.7.1",
+    "gulp-replace": "*",
+    "gulp-rimraf": "^0.1.1",
+    "gulp-run": "^1.6.4",
+    "gulp-shell": "^0.2.10",
+    "gulp-util": "^3.0.3",    
+    "gulp-uglify": "^1.0.1",
+    "gulp-if": "*",
+    "gulp-webserver":"*",
+    "run-sequence":"*",
+    "gulp-zip": "^2.0.2",
+    "rimraf": "^2.2.8",
+    "semver": "^4.1.0",
+    "react-localstorage": "0.2.2",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.0.0"
+  },
+  "scripts": {
+    "watch": "watchify js/index.js -o bundle.js",
+    "xamp": "sudo /opt/lampp/lampp start"
+  }
+}
