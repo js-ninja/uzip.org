@@ -8,6 +8,7 @@ var runSequence = require('run-sequence');
 gulp.task('webserver', function(){
 	gulp.src('./')
     .pipe(plugins.webserver({
+      fallback   : 'index.html',
       host       : 'localhost',
       livereload : true,
       open       : true
@@ -29,12 +30,21 @@ gulp.task('browserify', function(){
   .pipe(gulp.dest('./'))
 })
 
+gulp.task('build-css', function(){
+  return gulp.src('./less/**/*.less')
+    .pipe(plugins.less({
+      paths: [ path.join(__dirname, 'less', 'includes') ]
+    }))
+    .pipe(gulp.dest('./css'));
+})
+
 gulp.task('build', function() {
   runSequence(
-    ['browserify'], ['webserver']
+    ['browserify'], ['build-css'], ['webserver']
   );
 });
 
 gulp.task('watch', function(){
   gulp.watch('./js/*.js',['browserify'])
+  gulp.watch('./less/**/*.less',['build-css'])
 })
