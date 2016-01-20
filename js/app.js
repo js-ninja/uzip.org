@@ -12,10 +12,10 @@ class App extends React.Component {
 	    <div className="wrapper">
 	    	<Header />
 	    	<div className="container content">
-		    	<h1>Hello !</h1>
+		    	<h1>URL shortener!</h1>
 		    	<Link to="about">About</Link>
 		    	<Link to="dashboard">Dashboard</Link>
-		    	{this.props.children}
+		    	{this.props.children} {/*To let this component know that which component is to be rendered here*/}
 	    	</div>
 	    	<Footer />
 	    </div>

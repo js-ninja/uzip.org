@@ -21,9 +21,6 @@ import Dashboard from './dashboard';
 import '../css/libs/bootstrap.min.css';
 import './libs/bootstrap.min.js'
 
-/*Require our CSS*/
-import '../css/style.css';
-
 render((
   <Router history={browserHistory}>
     <Route path="/" component={App}>
