@@ -7,7 +7,7 @@ var runSequence = require('run-sequence');
 var watchLess   = require('gulp-watch-less');
 var domain      = require("domain");
 
-gulp.task('webserver', function(){
+/*gulp.task('webserver', function(){
 	gulp.src('./')
     .pipe(plugins.webserver({
       fallback   : 'index.html',
@@ -17,12 +17,12 @@ gulp.task('webserver', function(){
       },
       open       : true
 	}))
-})
+})*/
 
 gulp.task('browserify', function(){
   console.log('Browserifying ...');
 	return browserify({
-    entries : ['./js/index.js'],
+    entries : ['./client/js/index.js'],
     debug   : true
   })
   .transform('babelify', {presets: ['es2015', 'react']})
@@ -31,7 +31,8 @@ gulp.task('browserify', function(){
     console.log('Error:', err);
   })
   .pipe(source('bundle.js'))
-  .pipe(gulp.dest('./'))
+  .pipe(gulp.dest('./client'))
+  .pipe(plugins.livereload())
 
   /* ------------Issueeeeeee -----gulp start again on error*/
   /*.on('error', plugins.util.log);*/
@@ -47,19 +48,26 @@ gulp.task('browserify', function(){
 })
 
 gulp.task('build-css', function(){
-  return gulp.src('./less/**/*.less')
+  return gulp.src('./client/less/**/*.less')
     .pipe(plugins.less())
-    .pipe(gulp.dest('./css'))
+    .pipe(gulp.dest('./client/css'))
 })
+
+/*gulp.task('copy', function() {
+  console.log("copying assests")
+  return gulp.src(['./client/bundle.js','./client/index.html'])
+    .pipe(gulp.dest('./client/dist'))
+})*/
 
 gulp.task('build', function() {
   runSequence(
-    ['build-css'], ['browserify'], ['webserver'], ['watch']
+    ['build-css'], ['browserify'], ['watch']
   );
 });
 
 gulp.task('watch', function(){
-  gulp.watch('./js/*.js',['browserify'])
-  gulp.watch('./less/**/*.less',['build-css'])
-  gulp.watch('./css/**/*.css')
+  plugins.livereload.listen();
+  gulp.watch(['./client/js/*.js'],['browserify'])
+  gulp.watch('./client/less/**/*.less',['build-css'])
+  //gulp.watch('./client/css/**/*.css')
 })

@@ -9,7 +9,10 @@
     "react-router":"*",
     "history":"*",
     "lodash": "*",
-    "less":"*"
+    "underscore":"*",
+    "less":"*",
+    "body-parser":"*",
+    "restler":"*"
   },
   "browserify": {
     "transform": [

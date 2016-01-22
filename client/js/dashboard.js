@@ -2,24 +2,55 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom'
+import * as rest from './rest'
+import * as utility from './utility'
 
 class Dashboard extends React.Component {
 	constructor(props) { //Read 
     super(props); //Doubt
     this.state = { 
-    	count: 1
+    	msg : '',
+    	url : ''
     };
   }
 	componentDidMount() {
-		console.log("in mount", this.state.count)
+		utility.extractCode(window.location);
+		
+		// console.log("loc----",str)
+		// rest.getUrl('http://localhost:9001/getUrl/?code='+str)
+		// .then(function(data){
+		// console.log("data-----",data);
+		// window.location = data.entity
+		// })
+	}
+	setMsg(msg) {
+		this.setState({
+			msg : msg
+		})
 	}
 	shortenURL() {
+		var self = this;
 		/* 
 		* ReactDOM.findDOMNode(this.refs.Url) - bind is used on the click event of button since es6 doesnot give autobinding as in React.createClass()
 		*/
-		var longUrl = ReactDOM.findDOMNode(this.refs.Url);
-		var me=this;
-		console.log("in functfhfhgfjgion", longUrl.value,me);
+		let longUrl = ReactDOM.findDOMNode(this.refs.Url).value.trim();
+		if(longUrl !== ""){
+			if(utility.validateUrl(longUrl)){
+				this.setMsg("")
+				rest.addUrl(longUrl)
+				.then(function(data, error){
+				 	console.log("data",data)
+				 	self.setState({
+				 		url: data.entity
+				 	})
+				});
+			}
+			else {
+				this.setMsg("URL not valid")
+			}
+		} else {
+				this.setMsg("Please enter a URL")
+			}
 	}
 	render() {
 		return (
@@ -36,9 +67,11 @@ class Dashboard extends React.Component {
               </div>
               <div className="control-group but-control">
                 <div className="controls">
-                  <button className="btn  btn-info" type="button" onClick={this.shortenURL.bind(this)}>Shorten</button>
+                  <button className="btn btn-info" type="button" onClick={this.shortenURL.bind(this)}>Shorten</button>
                 </div>
               </div>
+              <label>{this.state.msg}</label>
+              <div><a href={this.state.url} target="_blank">{this.state.url}</a></div>
             </div>
           </div>
         </form>
