@@ -12,7 +12,9 @@
     "underscore":"*",
     "less":"*",
     "body-parser":"*",
-    "restler":"*"
+    "restler":"*",
+    "express":"*",
+    "cors":"*"
   },
   "browserify": {
     "transform": [

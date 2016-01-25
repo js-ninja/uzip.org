@@ -2,7 +2,7 @@ var router   = require("express").Router();
 var Utility  = require("../utility");
 var Url      = require("../data/url-schema");
 
-router.route("/urls").post(addUrl).get(getUrl);
+router.route("/urls").post(addUrl)
 
 function addUrl(req, res) {
 /*
@@ -37,9 +37,17 @@ If the requested url doesn't exist in the database then save the data in the dat
 			}
 	});
 }
-function getUrl(req, res) {
-	Url.findOne(req.query, function(err, data){
-   	res.send(data.longUrl)
+/*function getUrl(req, res) {
+	console.log("url--->")
+	var reg = req.query.query.split('/')
+	console.log("reg", reg)
+	//var reg = 
+	Url.findOne({code:reg[3]}, function(err, data){
+   	//res.send(data.longUrl)
+   	console.log("data", data)
+   	if(data)
+		res.redirect(302, data.longUrl);
+		//res.send(data.longUrl)
  });
-}
+}*/
 module.exports = router;

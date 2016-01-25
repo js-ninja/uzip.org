@@ -13,19 +13,39 @@ var client = Rest.wrap(mime, {
 });
 
 export function addUrl(url) {
-	console.log("url----->",url)
 	let postObjects = {
 		path    : config.path,
 		method  : "POST",
 		entity  : {
 			longUrl : url
 		},
-		headers : {},
+		headers : {
+			"crossDomain": true,
+			"Access-Control-Allow-Origin": "*",
+			"Access-Control-Allow-Headers": "X-Requested-With"
+		},
 		params  :{}
 	}
 	return client(postObjects)
 }
 
-export function getUrl(code) {
-	console.log("code-------->",code)
+export function getUrl(location) {
+	console.log("location-------->",location)
+	let postObjects = {
+		path    : config.path,
+		method  : "GET",
+		entity  : {
+			location : location
+		},
+		headers : {
+			"crossDomain": true,
+			"Access-Control-Allow-Origin": "*",
+			"Access-Control-Allow-Origin":"http://localhost:3000",
+			"Access-Control-Allow-Headers": "X-Requested-With"
+		},
+		params  :{
+			query: location
+	}
+}
+	return client(postObjects)
 }

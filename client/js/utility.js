@@ -10,5 +10,6 @@ export function validateUrl(url) {
 
 export function extractCode(url) {
 	let str = url.hash.substring(2,url.hash.indexOf('?'))
+	return str
 	console.log(str)
 }
