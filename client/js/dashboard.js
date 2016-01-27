@@ -19,7 +19,7 @@ class Dashboard extends React.Component {
 			msg : msg
 		})
 	}
-	shortenURL() {
+	shortenURL(e) {
 		var self = this;
 		/* 
 		* ReactDOM.findDOMNode(this.refs.Url) - bind is used on the click event of button since es6 doesnot give autobinding as in React.createClass()
@@ -42,6 +42,12 @@ class Dashboard extends React.Component {
 				this.setMsg("Please enter a URL")
 			}
 	}
+	handleEnter(e) {
+		if(e.keyCode === 13){
+			this.shortenURL()
+			return false //To stop the page from refreshing since the markup is inside a form - hence stop the default behaviour
+		}
+	}
 	render() {
 		return (
 		  <div className="container">
@@ -53,7 +59,7 @@ class Dashboard extends React.Component {
             <div className="control-group txt-control">
             	<div className="form-group">
 	              <label className="control-label" htmlFor="inputURL">Enter your long URL here</label>
-	              <input type="text" ref="Url" className="form-control" placeholder="Enter Your Long URL here"></input>
+	              <input type="text" ref="Url" className="form-control" onKeyDown={this.handleEnter.bind(this)} placeholder="Enter Your Long URL here"></input>
               </div>
               <div className="control-group but-control">
                 <div className="controls">
