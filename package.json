@@ -70,6 +70,7 @@
   },
   "scripts": {
     "watch": "watchify js/index.js -o bundle.js",
-    "xamp": "sudo /opt/lampp/lampp start"
+    "xamp": "sudo /opt/lampp/lampp start",
+    "start": "node server.js"
   }
 }

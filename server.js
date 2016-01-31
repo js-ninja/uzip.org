@@ -9,10 +9,10 @@ var Url        = require("./data/url-schema");
 var Utility    = require('./utility.js')
 
 // Connect to our mongo database
-mongoose.connect('mongodb://localhost/shortUrl');
+mongoose.connect('mongodb://localhost/uzip_shortUrl');
 
 //Express request pipeline
-app.use(express.static(path.join(__dirname,"../public")))
+app.use(express.static('./public'));
 app.use(bodyParser.json())
 
 app.get('/:code', function(req, res) {

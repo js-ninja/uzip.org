@@ -7,22 +7,10 @@ var runSequence = require('run-sequence');
 var watchLess   = require('gulp-watch-less');
 var domain      = require("domain");
 
-/*gulp.task('webserver', function(){
-	gulp.src('./')
-    .pipe(plugins.webserver({
-      fallback   : 'index.html',
-      host       : 'localhost',
-      livereload : {
-        enable : true
-      },
-      open       : true
-	}))
-})*/
-
 gulp.task('browserify', function(){
   console.log('Browserifying ...');
 	return browserify({
-    entries : ['./client/js/index.js'],
+    entries : ['./public/js/index.js'],
     debug   : true
   })
   .transform('babelify', {presets: ['es2015', 'react']})
@@ -31,33 +19,14 @@ gulp.task('browserify', function(){
     console.log('Error:', err);
   })
   .pipe(source('bundle.js'))
-  .pipe(gulp.dest('./client'))
-  .pipe(plugins.livereload())
-
-  /* ------------Issueeeeeee -----gulp start again on error*/
-  /*.on('error', plugins.util.log);*/
-  /*.pipe(plugins.tap(function(file) {
-    var d = domain.create();
-    d.on('error', function(err) {
-      plugins.util.log(plugins.util.colors.red('Browserify compile error:'), err.message, '\n\t', $.util.colors.cyan('in file'), file.path);
-      plugins.util.beep();
-    });
-
-    d.run(bundle)
-  }))*/
+  .pipe(gulp.dest('./public'))
 })
 
 gulp.task('build-css', function(){
-  return gulp.src('./client/less/**/*.less')
+  return gulp.src('./public/less/**/*.less')
     .pipe(plugins.less())
-    .pipe(gulp.dest('./client/css'))
+    .pipe(gulp.dest('./public/css'))
 })
-
-/*gulp.task('copy', function() {
-  console.log("copying assests")
-  return gulp.src(['./client/bundle.js','./client/index.html'])
-    .pipe(gulp.dest('./client/dist'))
-})*/
 
 gulp.task('build', function() {
   runSequence(
@@ -66,8 +35,6 @@ gulp.task('build', function() {
 });
 
 gulp.task('watch', function(){
-  plugins.livereload.listen();
-  gulp.watch(['./client/js/*.js'],['browserify'])
-  gulp.watch('./client/less/**/*.less',['build-css'])
-  //gulp.watch('./client/css/**/*.css')
+  gulp.watch(['./public/js/*.js'],['browserify'])
+  gulp.watch('./public/less/**/*.less',['build-css'])
 })
