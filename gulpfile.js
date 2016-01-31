@@ -6,6 +6,8 @@ var plugins     = require('gulp-load-plugins')();
 var runSequence = require('run-sequence');
 var watchLess   = require('gulp-watch-less');
 var domain      = require("domain");
+var uglify      = require('gulp-uglify');
+var buffer      = require('vinyl-buffer');
 
 gulp.task('browserify', function(){
   console.log('Browserifying ...');
@@ -19,6 +21,8 @@ gulp.task('browserify', function(){
     console.log('Error:', err);
   })
   .pipe(source('bundle.js'))
+  .pipe(buffer())
+  .pipe(uglify())
   .pipe(gulp.dest('./public'))
 })
 
