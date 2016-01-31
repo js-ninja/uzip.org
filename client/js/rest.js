@@ -20,32 +20,27 @@ export function addUrl(url) {
 			longUrl : url
 		},
 		headers : {
-			"crossDomain": true,
+			/*"crossDomain": true,
 			"Access-Control-Allow-Origin": "*",
-			"Access-Control-Allow-Headers": "X-Requested-With"
+			"Access-Control-Allow-Headers": "X-Requested-With"*/
 		},
 		params  :{}
 	}
 	return client(postObjects)
 }
 
-export function getUrl(location) {
+/*export function getUrl(location) {
 	console.log("location-------->",location)
+	//return Rest('http://localhost:3000/test/?url=http://google.com')
 	let postObjects = {
-		path    : config.path,
-		method  : "GET",
-		entity  : {
-			location : location
-		},
+		path    : "http://localhost:3000/test/?url=http://google.com",
+		method  : "POST",
 		headers : {
 			"crossDomain": true,
 			"Access-Control-Allow-Origin": "*",
 			"Access-Control-Allow-Origin":"http://localhost:3000",
 			"Access-Control-Allow-Headers": "X-Requested-With"
-		},
-		params  :{
-			query: location
-	}
+		}
 }
 	return client(postObjects)
-}
+}*/

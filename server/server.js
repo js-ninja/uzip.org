@@ -3,9 +3,8 @@ var express    = require('express')
 var mongoose   = require('mongoose')
 var path       = require('path')
 var bodyParser = require("body-parser")
-var cors       = require("cors")
 var app        = express()
-var port       = process.env.PORT || 3000
+var port       = process.env.PORT || 3003;
 var Url        = require("./data/url-schema");
 var Utility    = require('./utility.js')
 
@@ -15,7 +14,6 @@ mongoose.connect('mongodb://localhost/shortUrl');
 //Express request pipeline
 app.use(express.static(path.join(__dirname,"../client")))
 app.use(bodyParser.json())
-app.use(cors());
 
 app.get('/:code', function(req, res) {
   console.log("reg", req.params.code)
@@ -24,36 +22,54 @@ app.get('/:code', function(req, res) {
     if(data)
       res.redirect(302, data.longUrl)
     else
-      res.end()
-  })
-})
+      res.end();
+  });
+});
 
 app.post('/addUrl', function (req, res, next) {
-  console.log("on create");
-  Url.findOne({longUrl:req.body.longUrl}, function(err, data) {
-    if (err)
-      res.send(err);
+	Url.findOne({longUrl:req.body.longUrl}, function(err, data) {
+    if (err){
+      res.send(err)
+    }
     else if(data) {
-      console.log("already exists",data)
-      res.send("http://localhost:3000/"+data.code);
+      res.send("http://localhost:3003/"+data.code);
     } else {
-        var url = new Url({
-          code    : Utility.randomString(6,"abcdefghijklm"),
-          longUrl : req.body.longUrl
-        });
-        console.log("in last else data created",url)
-        url.save(function (err, data) {
-          console.log(data)
-          if (err)
-            res.send(err);
-          else
-            res.send("http://localhost:3000/"+data.code);
-        });
-      }
-  });
+    		var newCode = getCode()
+    		checkCode(newCode)
+    		.then(function(data){
+	    	 	var url = new Url({
+				  	code    : data,
+				  	longUrl : req.body.longUrl
+				  });
+				  url.save(function (err, data) {
+				    if (err)
+				      res.send(err);
+				    else
+				      res.send("http://localhost:3003/"+data.code);
+				  });
+    		})
+			}
+	});
 })
 
 app.listen(port, function () {
-  console.log('Example app listening on port 3000!')
+  console.log('Example app listening on port 3003!')
 });
 
+//Generate a random code
+function getCode() {
+	return Utility.randomString(6,"abcdefghijklmnopqrstuvwxyz")
+}
+
+//Check if the code is unique
+function checkCode(code) {
+	return new Promise(function (resolve, reject){
+		Url.findOne({code:code}, function(err, data) {
+			if(err === null){
+				resolve(code);
+			}else if(data){
+				checkCode(getCode());
+			}
+		})
+	})
+}
