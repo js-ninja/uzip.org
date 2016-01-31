@@ -17,7 +17,7 @@ import App from './app';
 import About from './about';
 import Dashboard from './dashboard';
 import NoMatch from './nomatch';
-import '../css/style.css';
+//import '../css/style.css';
 
 /*Require Bootstrap*/
 //import '../css/libs/bootstrap.min.css';

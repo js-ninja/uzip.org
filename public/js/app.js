@@ -13,8 +13,8 @@ class App extends React.Component {
 	    	<Header />
 	    	<div className="container content">
 		    	<h1>URL shortener!</h1>
-		    	<Link to="about">About</Link>
-		    	<Link to="dashboard">Dashboard</Link>
+		    	<Link to="about" className="menu-item">About</Link>
+		    	<Link to="dashboard" className="menu-item">Dashboard</Link>
 		    	{this.props.children} {/*To let this component know that which component is to be rendered here*/}
 	    	</div>
 	    	<Footer />

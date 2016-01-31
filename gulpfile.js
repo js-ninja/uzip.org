@@ -26,19 +26,19 @@ gulp.task('browserify', function(){
   .pipe(gulp.dest('./public'))
 })
 
-gulp.task('build-css', function(){
-  return gulp.src('./public/less/**/*.less')
-    .pipe(plugins.less())
-    .pipe(gulp.dest('./public/css'))
-})
+// gulp.task('build-css', function(){
+//   return gulp.src('./public/less/**/*.less')
+//     .pipe(plugins.less())
+//     .pipe(gulp.dest('./public/css'))
+// })
 
 gulp.task('build', function() {
   runSequence(
-    ['build-css'], ['browserify'], ['watch']
+    ['browserify'], ['watch']
   );
 });
 
 gulp.task('watch', function(){
   gulp.watch(['./public/js/*.js'],['browserify'])
-  gulp.watch('./public/less/**/*.less',['build-css'])
+  gulp.watch(['./public/css/*.css'],['browserify'])
 })

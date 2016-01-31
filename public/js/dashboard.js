@@ -54,7 +54,6 @@ class Dashboard extends React.Component {
 		  	<form>
           <div className="create-board">
             <div className="board-header">
-              <h3 className="board-header-h3">URL Shortener</h3>
             </div>
             <div className="control-group txt-control">
             	<div className="form-group">

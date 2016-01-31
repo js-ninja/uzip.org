@@ -7,6 +7,9 @@ body,
 #app {
   height: 100%;
 }
+.navbar {
+	border-radius: 0 !important;
+}
 .content {
   min-height: 100%;
   /* equal to footer height */
@@ -21,5 +24,12 @@ body,
   height: 100px;
 }
 .my-footer {
-  background: orange;
+  background: #000;
+}
+h1 {
+	text-align: center;
+}
+
+.menu-item {
+
 }
