@@ -12,7 +12,7 @@ var Utility    = require('./utility.js')
 mongoose.connect('mongodb://localhost/shortUrl');
 
 //Express request pipeline
-app.use(express.static(path.join(__dirname,"../client")))
+app.use(express.static(path.join(__dirname,"../public")))
 app.use(bodyParser.json())
 
 app.get('/:code', function(req, res) {
