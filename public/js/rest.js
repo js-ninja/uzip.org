@@ -20,11 +20,8 @@ export function addUrl(url) {
 			longUrl : url
 		},
 		headers : {
-			/*"crossDomain": true,
-			"Access-Control-Allow-Origin": "*",
-			"Access-Control-Allow-Headers": "X-Requested-With"*/
-		},
-		params  :{}
+			"Content-Type":"application/json"
+		}
 	}
 	return client(postObjects)
 }
