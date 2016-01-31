@@ -20,7 +20,7 @@ import NoMatch from './nomatch';
 import '../css/style.css';
 
 /*Require Bootstrap*/
-import '../css/libs/bootstrap.min.css';
+//import '../css/libs/bootstrap.min.css';
 import './libs/bootstrap.min.js'
 
 render((
