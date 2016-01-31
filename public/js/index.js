@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { render } from 'react-dom'
-import { Router, Route, Link, browserHistory } from 'react-router'
+import { Router, Route, Link, hashHistory } from 'react-router'
 
 //loading jquery
 //--------------------------------Isssueee------------------------------
@@ -24,10 +24,11 @@ import '../css/style.css';
 import './libs/bootstrap.min.js'
 
 render((
-  <Router history={browserHistory}>
+  <Router history={hashHistory}>
     <Route path="/" component={App}>
       <Route path="about" component={About}/>
       <Route path="dashboard" component={Dashboard}/>
+      <Route path="test" component={Dashboard}/>
     </Route>
   </Router>
 ), document.getElementById('app'))
