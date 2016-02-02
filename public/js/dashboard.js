@@ -36,10 +36,7 @@ class Dashboard extends React.Component {
 				});
 			}
 			else {
-				this.setMsg("URL not valid"),
-				this.setState({
-					url:""
-				})
+				this.setMsg("URL not valid")
 			}
 		} else {
 				this.setMsg("Please enter a URL")
