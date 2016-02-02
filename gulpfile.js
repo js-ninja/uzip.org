@@ -26,12 +26,6 @@ gulp.task('browserify', function(){
   .pipe(gulp.dest('./public'))
 })
 
-// gulp.task('build-css', function(){
-//   return gulp.src('./public/less/**/*.less')
-//     .pipe(plugins.less())
-//     .pipe(gulp.dest('./public/css'))
-// })
-
 gulp.task('build', function() {
   runSequence(
     ['browserify'], ['watch']

@@ -36,7 +36,10 @@ class Dashboard extends React.Component {
 				});
 			}
 			else {
-				this.setMsg("URL not valid")
+				this.setMsg("URL not valid"),
+				this.setState({
+					url:""
+				})
 			}
 		} else {
 				this.setMsg("Please enter a URL")
@@ -50,7 +53,7 @@ class Dashboard extends React.Component {
 	}
 	render() {
 		return (
-		  <div className="container">
+		  <div className="container dashboard">
 		  	<form>
           <div className="create-board">
             <div className="board-header">

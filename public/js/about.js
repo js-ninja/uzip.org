@@ -6,7 +6,7 @@ class About extends React.Component {
   render() {
     return(
 	    <div className="about">
-		    <p>About page!</p>
+		    <p>This is a full stack app made in NodeJS, ExpressJS, ReactJs 0.14, ES6 and Gulp</p>
 	    </div>
     )
   }

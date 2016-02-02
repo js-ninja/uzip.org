@@ -6,10 +6,8 @@ class Footer extends React.Component {
 	render() {
 		return (
 			<div className="my-footer">
-			  <div className="container-fluid">
+			  <div className="container">
 			    <div className="navbar-header">
-			      <a className="navbar-brand" href="#">footer
-			      </a>
 			    </div>
 			  </div>
 			</div>
