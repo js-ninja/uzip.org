@@ -1,4 +1,4 @@
-
+// noop:1
 var express    = require('express')
 var mongoose   = require('mongoose')
 var path       = require('path')
@@ -32,7 +32,7 @@ app.post('/addUrl', function (req, res, next) {
       res.send(err)
     }
     else if(data) {
-      res.send("http://uzip.org:3003/"+data.code);
+      res.send("http://uzip.org/"+data.code);
     } else {
     		var newCode = getCode()
     		checkCode(newCode)
@@ -45,7 +45,7 @@ app.post('/addUrl', function (req, res, next) {
 				    if (err)
 				      res.send(err);
 				    else
-				      res.send("http://uzip.org:3003/"+data.code);
+				      res.send("http://uzip.org/"+data.code);
 				  });
     		})
 			}
