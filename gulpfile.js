@@ -12,7 +12,7 @@ var buffer      = require('vinyl-buffer');
 gulp.task('browserify', function(){
   console.log('Browserifying ...');
 	return browserify({
-    entries : ['./public/js/index.js'],
+    entries : ['./public/src/js/component/app.js'],
     debug   : true
   })
   .transform('babelify', {presets: ['es2015', 'react']})
@@ -23,7 +23,7 @@ gulp.task('browserify', function(){
   .pipe(source('bundle.js'))
   .pipe(buffer())
   .pipe(uglify())
-  .pipe(gulp.dest('./public'))
+  .pipe(gulp.dest('./public/dist/'))
 })
 
 gulp.task('build', function() {
@@ -33,6 +33,6 @@ gulp.task('build', function() {
 });
 
 gulp.task('watch', function(){
-  gulp.watch(['./public/js/*.js'],['browserify'])
-  gulp.watch(['./public/css/*.css'],['browserify'])
+  gulp.watch(['./public/src/js/component/**/*.js'],['browserify'])
+  gulp.watch(['./public/src/css/*.css'],['browserify'])
 })
