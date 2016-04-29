@@ -1,0 +1,22 @@
+/* UI Breakup --> https://wireframe.cc/LzafeS */
+<App>
+	<Widget>
+		<ExtensionDownloadLink />
+		<Logo />
+		<WidgetForm />
+		<ShortenUrl />
+	</Widget>
+	<TrendingLinks>
+		<LinkPreviewList>
+			<LinkPreview/>
+			<LinkPreview/>
+			<LinkPreview/>
+		<LinkPreviewList/>
+	<TrendingLinks/>
+	<Footer>
+		<Contributors>
+			<Contributor/>
+			<Contributor/>
+		</Contributors>
+	</Footer>
+<App>
