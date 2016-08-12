@@ -1,0 +1,39 @@
+.widget{
+	padding: 20px 0px;
+	text-align: center;
+	border-bottom: 1px solid #BABABA;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+.widget-ext-link{
+	background: #EEE;
+	border-left: 1px solid #BBB;
+	border-bottom: 1px solid #BBB;
+	color: #AAA;
+	display: inline-block;
+	position: absolute;
+	top:0px;
+	right: 0px;
+	padding: 10px;
+	font-size: 11px;
+}
+
+.widget-logo > h1{
+	color: #77017F;
+}
+
+.widget-form {
+	margin: 0px auto;
+	width: 500px;
+}
+
+.widget-short-url {
+	margin: 20px 0px 0px 0px;
+	border-radius: 25px;
+	padding: 5px 15px;
+	display: inline-block;
+	background: #77017F;
+	color: #FFFFFF;
+	font-size: 10pt;
+}

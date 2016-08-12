@@ -13,12 +13,16 @@ class App extends React.Component {
         <div>
           <Widget />
         </div>
-        <div>
-          <TrendingLinks />
-        </div>
-        <div>
-          <Footer />
-        </div>
+          {/*
+            <div>
+              <TrendingLinks />
+            </div>
+          */}
+          {/*
+            <div>
+              <Footer />
+            </div>
+          */}
       </div>
     );
   }
