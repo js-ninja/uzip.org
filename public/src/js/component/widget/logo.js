@@ -5,7 +5,13 @@ class Logo extends React.Component {
 		return(
 			<div className="widget-logo">
 				<h1>uzip</h1>
-				<p className="widget-logo-caption">we have shorten {this.props.urlCount} urls.</p>
+				{
+					this.props.urlCount ?
+						<p className="widget-logo-caption">we have shorten {this.props.urlCount} urls.</p>
+					:
+						<p className="widget-logo-caption">we have shorten thousands of urls.</p>
+				}
+
 			</div>
 		);
 	}

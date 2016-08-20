@@ -1,7 +1,6 @@
 .widget{
 	padding: 20px 0px;
 	text-align: center;
-	border-bottom: 1px solid #BABABA;
 	margin-left: 20px;
 	margin-right: 20px;
 }
@@ -36,4 +35,8 @@
 	background: #77017F;
 	color: #FFFFFF;
 	font-size: 10pt;
+}
+
+.bg-red{
+	background: #BC2D49;
 }

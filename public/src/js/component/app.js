@@ -8,10 +8,12 @@ import Footer from './footer/footer';
 
 class App extends React.Component {
   render(){
+    let host = window.location.origin;
+
     return (
       <div>
         <div>
-          <Widget />
+          <Widget host={host}/>
         </div>
           {/*
             <div>
