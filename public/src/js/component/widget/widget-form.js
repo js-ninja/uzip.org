@@ -11,6 +11,15 @@ class WidgetForm extends React.Component {
     this.onFailure  = this.onFailure.bind(this);
   }
 
+  componentWillMount() {
+    qwest.setDefaultOptions({
+        responseType: 'json',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+  }
+
   isUrlValid(longurl){
     if(!longurl) { return false };
 
