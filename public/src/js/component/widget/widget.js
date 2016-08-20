@@ -7,16 +7,45 @@ import WidgetForm from './widget-form';
 import ShortenUrl from './shorten-url';
 
 class Widget extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      shortCode:null,
+      count:0,
+      error:undefined
+    }
+  }
+
+  setShortCode(code){
+    this.setState({
+      shortCode:code,
+      error:undefined
+    });
+  }
+
+  setError(error){
+    this.setState({
+      shortCode:null,
+      error:error
+    });
+  }
+
   render(){
-    let count = 1000;
     return (
       <div className="widget">
         {/*
           <ExtensionLink url="http://google.com/demo"/>
         */}
-        <Logo urlCount={count} />
-        <WidgetForm />
-        <ShortenUrl />
+        <Logo urlCount={this.state.count} />
+
+        <WidgetForm
+          setShortCode={this.setShortCode.bind(this)}
+          setError={this.setError.bind(this)} />
+
+        <ShortenUrl
+          host={this.props.host}
+          shortCode={this.state.shortCode}
+          error={this.state.error} />
       </div>
     );
   }

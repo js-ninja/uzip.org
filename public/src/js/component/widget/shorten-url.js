@@ -2,11 +2,21 @@ import React from 'react';
 
 class ShortenUrl extends React.Component {
 	render(){
-		return(
-			<div className="widget-short-url">
-				http://uzip.org/121sa
-			</div>
-		);
+		if(this.props.shortCode && !this.props.error) {
+			return(
+				<div className="widget-short-url">
+					{this.props.host}/{this.props.shortCode}
+				</div>
+			);
+		} else if ( !this.props.shortCode && this.props.error ){
+			return(
+				<div className="widget-short-url bg-red">
+					{this.props.error}
+				</div>
+			);
+		}else {
+			return null;
+		}
 	}
 }
 
