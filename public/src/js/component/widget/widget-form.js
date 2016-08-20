@@ -12,12 +12,13 @@ class WidgetForm extends React.Component {
   }
 
   componentWillMount() {
-    qwest.setDefaultOptions({
+    qwest.setDefaultDataType('json');
+    /*qwest.setDefaultOptions({
         responseType: 'json',
         headers: {
             'Content-Type': 'application/json'
         }
-    });
+    });*/
   }
 
   isUrlValid(longurl){
