@@ -32,7 +32,9 @@ app.post('/addUrl', function (req, res, next) {
       res.send(err)
     }
     else if(data) {
-      res.send("http://uzip.org/"+data.code);
+    	res.json({
+    		code:data.code
+    	})
     } else {
     		var newCode = getCode()
     		checkCode(newCode)
@@ -45,7 +47,9 @@ app.post('/addUrl', function (req, res, next) {
 				    if (err)
 				      res.send(err);
 				    else
-				      res.send("http://uzip.org/"+data.code);
+				    	res.json({
+				    		code:data.code
+				    	})
 				  });
     		})
 			}
