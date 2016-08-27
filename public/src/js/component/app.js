@@ -6,6 +6,17 @@ import Widget from './widget/widget';
 import TrendingLinks from './trending-links/trending-links';
 import Footer from './footer/footer';
 
+// var WebSocket = require('ws');
+var host = window.document.location.host.replace(/:.*/, '');
+window.ws = new WebSocket('ws://' + host + ':3003');
+
+ws.onmessage = function (event) {
+  console.log('a', JSON.parse(event.data));
+};
+
+
+
+
 class App extends React.Component {
   render(){
     let host = window.location.origin;
