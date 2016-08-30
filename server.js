@@ -26,14 +26,16 @@ wss.broadcast = function broadcast(data) {
 wss.on('connection', function connection(ws) {
   console.log('Connection Started');
 
+  Url.find({}).count(function(err, data){
+    ws.send(JSON.stringify({totalCount:data}));
+  })
+
   var location = url.parse(ws.upgradeReq.url, true);
 
   ws.on('message', function incoming(message) {
     console.log('received: %s', message);
   });
 
-  var welcomeMessage = {"message":"Welcome User"};
-  ws.send(JSON.stringify(welcomeMessage));
 })
 
 
@@ -67,7 +69,7 @@ app.post('/addUrl', function (req, res, next) {
       res.send(err)
     }
     else if(data) {
-      wss.broadcast(JSON.stringify({"broadcast":"Dont Update Counter"}));
+      // wss.broadcast(JSON.stringify({"broadcast":"Dont Update Counter"}));
       res.json({
         code:data.code
       })
@@ -83,7 +85,9 @@ app.post('/addUrl', function (req, res, next) {
             if (err)
               res.send(err);
             else
-              wss.broadcast(JSON.stringify({"broadcast":"Update Counter"}));
+              wss.broadcast(JSON.stringify({"broadcast":{"updateTotalCount":true}}
+                )
+              );
               res.json({
                 code:data.code
               })
