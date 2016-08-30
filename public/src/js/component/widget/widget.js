@@ -11,7 +11,6 @@ class Widget extends React.Component {
     super();
     this.state = {
       shortCode:null,
-      count:0,
       error:undefined
     }
   }
@@ -36,7 +35,7 @@ class Widget extends React.Component {
         {/*
           <ExtensionLink url="http://google.com/demo"/>
         */}
-        <Logo urlCount={this.state.count} />
+        <Logo urlCount={this.props.totalCount} />
 
         <WidgetForm
           setShortCode={this.setShortCode.bind(this)}

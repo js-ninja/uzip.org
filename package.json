@@ -17,7 +17,8 @@
     "react-router": "*",
     "rest": "^1.3.1",
     "restler": "*",
-    "underscore": "*"
+    "underscore": "*",
+    "ws": "^1.1.1"
   },
   "browserify": {
     "transform": [

@@ -1,4 +1,7 @@
 // noop:1
+var server     = require('http').createServer();
+var WebSocketServer = require('ws').Server;
+var wss        = new WebSocketServer({ server:server });
 var express    = require('express')
 var mongoose   = require('mongoose')
 var path       = require('path')
@@ -7,9 +10,34 @@ var app        = express()
 var port       = process.env.PORT || 3003;
 var Url        = require("./data/url-schema");
 var Utility    = require('./utility.js')
+var url = require('url')
 
 // Connect to our mongo database
 mongoose.connect('mongodb://localhost/uzip_shortUrl');
+
+// WSS Broadcast
+wss.broadcast = function broadcast(data) {
+  wss.clients.forEach(function each(client) {
+    client.send(data);
+  })
+}
+
+// WSS CONNECTION
+wss.on('connection', function connection(ws) {
+  console.log('Connection Started');
+
+  Url.find({}).count(function(err, data){
+    ws.send(JSON.stringify({totalCount:data}));
+  })
+
+  var location = url.parse(ws.upgradeReq.url, true);
+
+  ws.on('message', function incoming(message) {
+    console.log('received: %s', message);
+  });
+
+})
+
 
 //Express request pipeline
 app.use(express.static('./public'));
@@ -35,11 +63,13 @@ app.get('/:code', function(req, res) {
 });
 
 app.post('/addUrl', function (req, res, next) {
+
   Url.findOne({longUrl:req.body.longUrl}, function(err, data) {
     if (err){
       res.send(err)
     }
     else if(data) {
+      // wss.broadcast(JSON.stringify({"broadcast":"Dont Update Counter"}));
       res.json({
         code:data.code
       })
@@ -55,6 +85,9 @@ app.post('/addUrl', function (req, res, next) {
             if (err)
               res.send(err);
             else
+              wss.broadcast(JSON.stringify({"broadcast":{"updateTotalCount":true}}
+                )
+              );
               res.json({
                 code:data.code
               })
@@ -64,9 +97,9 @@ app.post('/addUrl', function (req, res, next) {
   });
 })
 
-app.listen(port, function () {
-  console.log('Example app listening on port 3003!')
-});
+
+server.on('request', app);
+server.listen(port, function () { console.log('Listening on - ' + server.address().port)});
 
 //Generate a random code
 function getCode() {
