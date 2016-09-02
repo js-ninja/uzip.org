@@ -100,6 +100,27 @@ app.post('/addUrl', function (req, res, next) {
         })
       }
   });
+});
+
+app.get('/api/trending/today', function (req, res, next) {
+  var _data = {};
+  var cutoff = new Date();
+  cutoff.setDate( cutoff.getDate() - 1 );
+  UrlLogs.find({date: {$gt: cutoff} }, function(err, data) {
+    if(err) res.end();
+
+    if(data && data.length) {
+      data.forEach( function(d) {
+        if(_data[d.code]){
+          _data[d.code] = _data[d.code] + 1;
+        } else {
+          _data[d.code] = 1;
+        }
+      })
+    }
+    res.send(_data);
+  })
+
 })
 
 
