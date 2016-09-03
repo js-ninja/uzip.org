@@ -49,7 +49,7 @@ app.get('/:code', function(req, res) {
     if(data && data.longUrl){
 
       //Save entry in log
-      saveToLogs(req.params.code);
+      saveToLogs(req.params.code, data.longUrl);
 
       var redirectToUrl = data.longUrl;
 
@@ -112,9 +112,9 @@ app.get('/api/trending/today', function (req, res, next) {
     if(data && data.length) {
       data.forEach( function(d) {
         if(_data[d.code]){
-          _data[d.code] = _data[d.code] + 1;
+          _data[d.code]['counts'] = _data[d.code]['counts'] + 1;
         } else {
-          _data[d.code] = 1;
+          _data[d.code] = {"url":d.longUrl, counts:1};
         }
       })
     }
@@ -145,8 +145,8 @@ function checkCode(code) {
   })
 }
 
-function saveToLogs(code){
+function saveToLogs(code, longUrl){
   //Save entry in log
-  var urlLogs = new UrlLogs({code:code});
+  var urlLogs = new UrlLogs({code:code, longUrl: longUrl});
   urlLogs.save();
 }
