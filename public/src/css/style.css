@@ -40,3 +40,50 @@
 .bg-red{
 	background: #BC2D49;
 }
+
+.trending-url {
+    width: 600px;
+    margin: 0px auto;
+}
+
+.trending-url > h2 {
+	font-size: 18px;
+	text-align: center;
+	padding-bottom: 10px;
+	color: #77017F;
+}
+
+.meta {
+	border: 1px solid #DDD;
+	margin-bottom: 10px;
+	padding: 10px;
+}
+
+.meta-image-container {
+	width:578px;
+	background: #333;
+	text-align: center;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.meta-image {
+	width: 500px;
+}
+
+.meta-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #555;
+}
+
+.meta-url {
+    font-size: 11px;
+    color: #77017F;
+}
+
+
+.meta-description {
+    font-size: 12px;
+    text-align: justify;
+}

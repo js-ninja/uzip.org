@@ -56,11 +56,11 @@ class App extends React.Component {
         <div>
           <Widget host={host} totalCount={this.state.totalCount}/>
         </div>
-          {/*
+          {
             <div>
               <TrendingLinks />
             </div>
-          */}
+          }
           {/*
             <div>
               <Footer />
