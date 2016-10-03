@@ -9,8 +9,9 @@ var bodyParser = require("body-parser")
 var app        = express()
 var port       = process.env.PORT || 3003;
 var Url        = require("./data/url-schema");
-var Utility    = require('./utility.js')
-var url = require('url')
+var UrlLogs    = require("./data/url-logs-schema");
+var Utility    = require('./utility.js');
+var url        = require('url')
 
 // Connect to our mongo database
 mongoose.connect('mongodb://localhost/uzip_shortUrl');
@@ -26,7 +27,7 @@ wss.broadcast = function broadcast(data) {
 wss.on('connection', function connection(ws) {
   console.log('Connection Started');
 
-  Url.find({}).count(function(err, data){
+  Url.count(function(err, data){
     ws.send(JSON.stringify({totalCount:data}));
   })
 
@@ -46,6 +47,10 @@ app.use(bodyParser.json())
 app.get('/:code', function(req, res) {
   Url.findOne({code:req.params.code}, function(err, data){
     if(data && data.longUrl){
+
+      //Save entry in log
+      saveToLogs(req.params.code, data.longUrl);
+
       var redirectToUrl = data.longUrl;
 
       // Check for http/https protocol before redirect
@@ -95,6 +100,27 @@ app.post('/addUrl', function (req, res, next) {
         })
       }
   });
+});
+
+app.get('/api/trending/today', function (req, res, next) {
+  var _data = {};
+  var cutoff = new Date();
+  cutoff.setDate( cutoff.getDate() - 1 );
+  UrlLogs.find({date: {$gt: cutoff} }, function(err, data) {
+    if(err) res.end();
+
+    if(data && data.length) {
+      data.forEach( function(d) {
+        if(_data[d.code]){
+          _data[d.code]['counts'] = _data[d.code]['counts'] + 1;
+        } else {
+          _data[d.code] = {"url":d.longUrl, counts:1};
+        }
+      })
+    }
+    res.send(_data);
+  })
+
 })
 
 
@@ -117,4 +143,10 @@ function checkCode(code) {
       }
     })
   })
+}
+
+function saveToLogs(code, longUrl){
+  //Save entry in log
+  var urlLogs = new UrlLogs({code:code, longUrl: longUrl});
+  urlLogs.save();
 }
